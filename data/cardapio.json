@@ -1,0 +1,30 @@
+{
+  "nome": "Don Gennaro",
+  "categorias": {
+    "salgadas": [
+      { "nome": "Mussarela", "descricao": "Mussarela, molho de tomate e orégano", "pequena": 25.9, "grande": 42.9 },
+      { "nome": "Calabresa", "descricao": "Calabresa e cebola", "pequena": 25.9, "grande": 41.9 },
+      { "nome": "Portuguesa", "descricao": "Mussarela, presunto, ovos, ervilha, cebola e azeitona", "pequena": 27.9, "grande": 45.9 },
+      { "nome": "Frango com Catupiry", "descricao": "Frango desfiado e catupiry", "pequena": 27.9, "grande": 46.9 },
+      { "nome": "Quatro Queijos", "descricao": "Mussarela, provolone, parmesão e catupiry", "pequena": 29.9, "grande": 55.9 },
+      { "nome": "Cinco Queijos", "descricao": "Mussarela, provolone, parmesão, gorgonzola e catupiry", "pequena": 30.9, "grande": 57.9 },
+      { "nome": "Napolitana", "descricao": "Mussarela, parmesão e tomate", "pequena": 26.6, "grande": 44.9 },
+      { "nome": "Pepperoni", "descricao": "Mussarela e pepperoni", "pequena": 29.9, "grande": 49.9 },
+      { "nome": "Palmito", "descricao": "Palmito e mussarela", "pequena": 29.9, "grande": 49.9 },
+      { "nome": "Palmito com Catupiry", "descricao": "Palmito e catupiry", "pequena": 30.9, "grande": 51.9 },
+      { "nome": "Paulista", "descricao": "Mussarela, calabresa, bacon, ovos e ervilha", "pequena": 27.9, "grande": 47.9 },
+      { "nome": "Toscana", "descricao": "Mussarela, calabresa e bacon", "pequena": 27.9, "grande": 46.9 },
+      { "nome": "Marguerita", "descricao": "Mussarela, manjericão, tomate e parmesão", "pequena": 26.9, "grande": 45.9 },
+      { "nome": "Bacon", "descricao": "Bacon, mussarela e cebola", "pequena": 26.9, "grande": 44.9 },
+      { "nome": "Brócolis", "descricao": "Brócolis, bacon, mussarela e alho frito", "pequena": 26.9, "grande": 44.9 }
+    ],
+    "doces": [
+      { "nome": "Chocolate", "descricao": "Chocolate com granulado", "pequena": 28.9, "grande": 43.9 },
+      { "nome": "Chocolate com Morango", "descricao": "Chocolate com morango", "pequena": 31.9, "grande": 48.9 },
+      { "nome": "Romeu e Julieta", "descricao": "Mussarela e goiabada", "pequena": 28.9, "grande": 43.9 },
+      { "nome": "Prestígio", "descricao": "Chocolate e coco ralado", "pequena": 28.9, "grande": 43.9 },
+      { "nome": "Kit Kat", "descricao": "Chocolate com pedaços de Kit Kat", "pequena": 33.9, "grande": 51.9 },
+      { "nome": "Sonho de Valsa", "descricao": "Chocolate com pedaços de Sonho de Valsa", "pequena": 31.9, "grande": 51.9 }
+    ]
+  }
+}
