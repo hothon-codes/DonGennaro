@@ -1,36 +1,94 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#000000">
-    <title>Don Gennaro | Cardápio Digital</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#8b1e1e">
+  <meta name="description" content="Cardápio digital da Pizzaria Don Gennaro. Veja sabores, preços e peça pelo WhatsApp.">
+  <title>Don Gennaro | Cardápio Digital</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
+  <header class="hero">
+    <div class="hero__overlay"></div>
+    <div class="container hero__content">
+      <p class="hero__badge">Pizzaria Don Gennaro</p>
+      <h1>Cardápio digital moderno para pedir com praticidade</h1>
+      <p class="hero__text">Sabores salgados e doces, preços claros e pedido rápido via WhatsApp.</p>
+      <div class="hero__actions">
+        <a class="btn btn--primary" href="#cardapio">Ver cardápio</a>
+        <a class="btn btn--secondary" id="btn-whatsapp-top" href="#" target="_blank" rel="noopener">Pedir no WhatsApp</a>
+      </div>
+      <ul class="hero__highlights" aria-label="Destaques">
+        <li>Massa artesanal</li>
+        <li>Entrega rápida</li>
+        <li>Pedido fácil</li>
+      </ul>
+    </div>
+  </header>
 
-    <header>
-        <h1>🍕 Don Gennaro</h1>
-        <p>As melhores pizzas da cidade</p>
-    </header>
-
-    <section class="banner">
-        <h2>Promoção imperdível!</h2>
-        <p>Peça agora pelo WhatsApp</p>
+  <main>
+    <section class="promo">
+      <div class="container promo__box">
+        <div>
+          <p class="promo__label">Promoção da semana</p>
+          <h2>Monte seu pedido e fale com o atendente em segundos</h2>
+        </div>
+        <a class="btn btn--accent" id="btn-whatsapp-promo" href="#" target="_blank" rel="noopener">Chamar agora</a>
+      </div>
     </section>
 
-    <main class="cardapio">
-        <h2>🍕 Pizzas Salgadas</h2>
-        <div id="lista-salgadas"></div>
+    <section class="container section" id="cardapio">
+      <div class="section__header">
+        <h2>Cardápio</h2>
+        <p>Escolha o sabor e clique no tamanho para montar a mensagem automaticamente.</p>
+      </div>
 
-        <h2>🍫 Pizzas Doces</h2>
-        <div id="lista-doces"></div>
-    </main>
+      <nav class="category-nav" aria-label="Categorias do cardápio">
+        <a href="#salgadas">Salgadas</a>
+        <a href="#doces">Doces</a>
+      </nav>
 
-    <section class="contato">
-        <a href="https://wa.me/5512992107520" target="_blank">Falar com Atendente</a>
+      <section class="menu-block" id="salgadas">
+        <div class="menu-block__header">
+          <h3>Pizzas salgadas</h3>
+          <p>Sabores clássicos e especiais para todos os gostos.</p>
+        </div>
+        <div class="menu-grid" id="lista-salgadas"></div>
+      </section>
+
+      <section class="menu-block" id="doces">
+        <div class="menu-block__header">
+          <h3>Pizzas doces</h3>
+          <p>Opções perfeitas para fechar a refeição.</p>
+        </div>
+        <div class="menu-grid" id="lista-doces"></div>
+      </section>
     </section>
 
-    <script src="script.js"></script>
+    <section class="container info-grid">
+      <article class="info-card">
+        <h3>Atendimento</h3>
+        <p>Pedido direto pelo WhatsApp com texto pronto e objetivo.</p>
+      </article>
+      <article class="info-card">
+        <h3>Horário</h3>
+        <p>Coloque aqui o horário real da pizzaria quando confirmar com o cliente.</p>
+      </article>
+      <article class="info-card">
+        <h3>Retirada e entrega</h3>
+        <p>Mostre se há retirada no balcão, delivery ou ambos.</p>
+      </article>
+    </section>
+  </main>
+
+  <a class="whatsapp-float" id="whatsapp-float" href="#" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+    WhatsApp
+  </a>
+
+  <script src="../js/script.js"></script>
 </body>
 </html>
