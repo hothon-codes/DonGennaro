@@ -1,93 +1,241 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#8b1e1e">
-  <meta name="description" content="Cardápio digital da Pizzaria Don Gennaro. Veja sabores, preços e peça pelo WhatsApp.">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#b61d1d" />
+  <meta name="description" content="Cardápio digital da Don Gennaro. Veja sabores, preços e monte seu pedido pelo WhatsApp." />
   <title>Don Gennaro | Cardápio Digital</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/style.css" />
 </head>
 <body>
-  <header class="hero">
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="hero" id="topo">
     <div class="hero__overlay"></div>
     <div class="container hero__content">
-      <p class="hero__badge">Pizzaria Don Gennaro</p>
-      <h1>Cardápio digital moderno para pedir com praticidade</h1>
-      <p class="hero__text">Sabores salgados e doces, preços claros e pedido rápido via WhatsApp.</p>
-      <div class="hero__actions">
-        <a class="btn btn--primary" href="#cardapio">Ver cardápio</a>
-        <a class="btn btn--secondary" id="btn-whatsapp-top" href="#" target="_blank" rel="noopener">Pedir no WhatsApp</a>
+      <div class="brand">
+        <img class="brand__logo" src="../assets/img/logo.JPG" alt="Logo Don Gennaro" width="220" height="220" />
       </div>
-      <ul class="hero__highlights" aria-label="Destaques">
-        <li>Massa artesanal</li>
-        <li>Entrega rápida</li>
-        <li>Pedido fácil</li>
+
+      <p class="hero__eyebrow">Cardápio digital moderno para pedir com praticidade</p>
+      <h1>Don Gennaro</h1>
+      <p class="hero__text">
+        Escolha suas pizzas, adicione bebidas, selecione borda recheada e envie seu pedido direto no WhatsApp.
+      </p>
+
+      <div class="hero__actions">
+        <a class="btn btn--primary" href="#menu-fixo">Ver menu</a>
+        <a class="btn btn--secondary" id="whatsapp-hero" href="#" target="_blank" rel="noopener noreferrer">Pedir no WhatsApp</a>
+      </div>
+
+      <ul class="hero__badges" aria-label="Informações principais">
+        <li>Quarta a segunda: 18h às 00h</li>
+        <li>Fechado às terças</li>
+        <li>Delivery e retirada</li>
       </ul>
     </div>
   </header>
 
-  <main>
-    <section class="promo">
-      <div class="container promo__box">
+  <nav class="menu-fixo" id="menu-fixo" aria-label="Menu principal">
+    <div class="container menu-fixo__inner">
+      <a href="#promocoes">Promoções</a>
+      <a href="#salgadas">Pizzas salgadas</a>
+      <a href="#doces">Pizzas doces</a>
+      <a href="#bordas">Bordas recheadas</a>
+      <a href="#bebidas">Bebidas</a>
+      <a href="#pedido">Meu pedido</a>
+    </div>
+  </nav>
+
+  <main id="conteudo">
+    <section class="promo-section" id="promocoes">
+      <div class="container">
+        <div class="section-head">
+          <h2>Promoções</h2>
+          <p>A arte promocional fica aqui e pode ser trocada facilmente quando surgir uma nova oferta.</p>
+        </div>
+
+        <article class="promo-card">
+          <img src="../assets/img/promocao.png" alt="Promoção da pizzaria Don Gennaro" width="1200" height="1600" loading="lazy" decoding="async">
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="salgadas">
+      <div class="container">
+        <div class="section-head">
+          <h2>Pizzas salgadas</h2>
+          <p>Sabores mais coloridos e chamativos para despertar o interesse do cliente.</p>
+        </div>
+
+        <div class="hero-card hero-card--right">
+          <img src="../assets/img/pizza-salgada.png" alt="Pizza salgada" width="1200" height="1200" loading="lazy" decoding="async">
+          <div class="hero-card__content">
+            <h3>Sabores salgados</h3>
+            <p>Monte seu pedido com sabores tradicionais e especiais da casa.</p>
+          </div>
+        </div>
+
+        <div class="grid" id="lista-salgadas"></div>
+      </div>
+    </section>
+
+    <section class="section" id="doces">
+      <div class="container">
+        <div class="section-head">
+          <h2>Pizzas doces</h2>
+          <p>Uma área visualmente mais quente e aconchegante para os sabores doces.</p>
+        </div>
+
+        <div class="hero-card hero-card--left hero-card--dark">
+          <img src="../assets/img/pizza-doce.png" alt="Pizza doce" width="1200" height="1200" loading="lazy" decoding="async">
+          <div class="hero-card__content">
+            <h3>Sabores doces</h3>
+            <p>Ótima para fechar o pedido com uma sobremesa especial.</p>
+          </div>
+        </div>
+
+        <div class="grid" id="lista-doces"></div>
+      </div>
+    </section>
+
+    <section class="section" id="bordas">
+      <div class="container">
+        <div class="section-head">
+          <h2>Bordas recheadas</h2>
+          <p>Adicione borda recheada ao pedido sem complicar o fluxo do cliente.</p>
+        </div>
+
+        <div class="border-grid">
+          <article class="mini-card">
+            <h3>Cheddar</h3>
+            <p>Opção cremosa e marcante.</p>
+            <strong>R$ 12,00</strong>
+          </article>
+          <article class="mini-card">
+            <h3>Mussarela</h3>
+            <p>Clássica e equilibrada.</p>
+            <strong>R$ 12,00</strong>
+          </article>
+          <article class="mini-card">
+            <h3>Catupiry</h3>
+            <p>Uma das preferidas do cliente.</p>
+            <strong>R$ 12,00</strong>
+          </article>
+          <article class="mini-card">
+            <h3>Chocolate</h3>
+            <p>Ideal para pizzas doces.</p>
+            <strong>R$ 12,00</strong>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="bebidas">
+      <div class="container">
+        <div class="section-head">
+          <h2>Bebidas</h2>
+          <p>Algumas opções já preparadas para integrar o carrinho com o pedido.</p>
+        </div>
+
+        <div class="hero-card hero-card--right hero-card--compact">
+          <img src="../assets/img/bebidas.png" alt="Latas de refrigerante" width="1200" height="1600" loading="lazy" decoding="async">
+          <div class="hero-card__content">
+            <h3>Entrega de bebidas</h3>
+            <p>Inclua refrigerantes e sucos de 1L no mesmo pedido.</p>
+          </div>
+        </div>
+
+        <div class="drink-grid" id="lista-bebidas"></div>
+      </div>
+    </section>
+
+    <section class="section section--highlight">
+      <div class="container highlight">
         <div>
-          <p class="promo__label">Promoção da semana</p>
-          <h2>Monte seu pedido e fale com o atendente em segundos</h2>
+          <p class="highlight__label">Retirada e delivery</p>
+          <h2>Consulte a taxa de entrega da sua região e escolha a melhor forma de receber.</h2>
+          <p>Você pode retirar no balcão ou pedir delivery. Em caso de dúvida, fale com a pizzaria no WhatsApp.</p>
         </div>
-        <a class="btn btn--accent" id="btn-whatsapp-promo" href="#" target="_blank" rel="noopener">Chamar agora</a>
       </div>
     </section>
 
-    <section class="container section" id="cardapio">
-      <div class="section__header">
-        <h2>Cardápio</h2>
-        <p>Escolha o sabor e clique no tamanho para montar a mensagem automaticamente.</p>
+    <section class="section" id="pedido">
+      <div class="container">
+        <div class="section-head">
+          <h2>Meu pedido</h2>
+          <p>Revise tudo antes de enviar. Aqui também ficam azeitonas, observações e a confirmação final.</p>
+        </div>
+
+        <div class="order-layout">
+          <div class="order-panel">
+            <div class="order-panel__top">
+              <img src="../assets/img/pizza-lenha.png" alt="Pizza no forno a lenha" width="1200" height="1600" loading="lazy" decoding="async">
+            </div>
+            <div class="order-panel__body">
+              <h3>Estamos quase lá</h3>
+              <p>Revise os itens do carrinho, escolha azeitonas se quiser e confirme o pedido para enviar ao WhatsApp.</p>
+            </div>
+          </div>
+
+          <div class="cart-panel">
+            <div class="cart-panel__header">
+              <h3>Resumo do carrinho</h3>
+              <span id="cart-count">0 itens</span>
+            </div>
+
+            <div class="cart-options">
+              <label class="check">
+                <input type="checkbox" id="want-olives">
+                <span>Quero azeitonas</span>
+              </label>
+            </div>
+
+            <div class="cart-list" id="cart-list">
+              <p class="empty">Seu pedido ainda está vazio.</p>
+            </div>
+
+            <div class="cart-note">
+              <label for="obs">Observações</label>
+              <textarea id="obs" rows="3" placeholder="Ex.: sem cebola, cortar em 8 pedaços, retirar no balcão..."></textarea>
+            </div>
+
+            <div class="cart-total">
+              <span>Total estimado</span>
+              <strong id="cart-total">R$ 0,00</strong>
+            </div>
+
+            <div class="cart-actions">
+              <button class="btn btn--ghost" type="button" id="btn-clear">Limpar carrinho</button>
+              <button class="btn btn--primary" type="button" id="btn-whatsapp">Confirmar e enviar</button>
+            </div>
+          </div>
+        </div>
       </div>
-
-      <nav class="category-nav" aria-label="Categorias do cardápio">
-        <a href="#salgadas">Salgadas</a>
-        <a href="#doces">Doces</a>
-      </nav>
-
-      <section class="menu-block" id="salgadas">
-        <div class="menu-block__header">
-          <h3>Pizzas salgadas</h3>
-          <p>Sabores clássicos e especiais para todos os gostos.</p>
-        </div>
-        <div class="menu-grid" id="lista-salgadas"></div>
-      </section>
-
-      <section class="menu-block" id="doces">
-        <div class="menu-block__header">
-          <h3>Pizzas doces</h3>
-          <p>Opções perfeitas para fechar a refeição.</p>
-        </div>
-        <div class="menu-grid" id="lista-doces"></div>
-      </section>
-    </section>
-
-    <section class="container info-grid">
-      <article class="info-card">
-        <h3>Atendimento</h3>
-        <p>Pedido direto pelo WhatsApp com texto pronto e objetivo.</p>
-      </article>
-      <article class="info-card">
-        <h3>Horário</h3>
-        <p>Coloque aqui o horário real da pizzaria quando confirmar com o cliente.</p>
-      </article>
-      <article class="info-card">
-        <h3>Retirada e entrega</h3>
-        <p>Mostre se há retirada no balcão, delivery ou ambos.</p>
-      </article>
     </section>
   </main>
 
-  <a class="whatsapp-float" id="whatsapp-float" href="#" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
-    WhatsApp
-  </a>
+  <a class="whatsapp-float" id="whatsapp-float" href="#" target="_blank" rel="noopener noreferrer" aria-label="Falar no WhatsApp">WhatsApp</a>
+
+  <template id="pizza-template">
+    <article class="pizza-card">
+      <div class="pizza-card__body">
+        <div class="pizza-card__top">
+          <h3></h3>
+          <span class="price-tag"></span>
+        </div>
+        <p class="pizza-card__desc"></p>
+        <div class="pizza-card__actions">
+          <button type="button" class="btn-size" data-size="P"></button>
+          <button type="button" class="btn-size" data-size="G"></button>
+        </div>
+      </div>
+    </article>
+  </template>
 
   <script src="../js/script.js"></script>
 </body>
