@@ -1,4 +1,5 @@
 const TELEFONE = "5512992107520";
+
 const formatBRL = new Intl.NumberFormat("pt-BR", {
   style: "currency",
   currency: "BRL"
@@ -34,7 +35,9 @@ function updateWhatsAppLinks() {
   const message = "Olá! Vim pelo cardápio digital da Don Gennaro e gostaria de fazer um pedido.";
   ["whatsapp-hero", "whatsapp-float"].forEach((id) => {
     const el = document.getElementById(id);
-    if (el) el.href = whatsappLink(message);
+    if (el) {
+      el.href = whatsappLink(message);
+    }
   });
 }
 
@@ -42,14 +45,29 @@ function buildItemKey(item) {
   return `${item.nome}-${item.tamanho}-${item.extra || ""}`;
 }
 
+function flashCartPanel() {
+  const cartPanel = document.querySelector(".cart-panel");
+  if (!cartPanel) return;
+
+  cartPanel.classList.remove("cart-panel--flash");
+  void cartPanel.offsetWidth;
+  cartPanel.classList.add("cart-panel--flash");
+
+  setTimeout(() => {
+    cartPanel.classList.remove("cart-panel--flash");
+  }, 180);
+}
+
 function addItem(item) {
   const key = buildItemKey(item);
   const existing = state.items.find((x) => buildItemKey(x) === key);
+
   if (existing) {
     existing.qtd += 1;
   } else {
     state.items.push({ ...item, qtd: 1 });
   }
+
   renderCart();
 }
 
@@ -61,6 +79,7 @@ function removeItem(index) {
 function renderPizzaCards(items, containerId, type) {
   const container = document.getElementById(containerId);
   const template = document.getElementById("pizza-template");
+
   if (!container || !template) return;
 
   container.innerHTML = "";
@@ -80,8 +99,23 @@ function renderPizzaCards(items, containerId, type) {
     buttons[0].textContent = `P ${formatBRL.format(item.pequena)}`;
     buttons[1].textContent = `G ${formatBRL.format(item.grande)}`;
 
-    buttons[0].addEventListener("click", () => addItem({ nome: item.nome, tamanho: "P", preco: item.pequena, type }));
-    buttons[1].addEventListener("click", () => addItem({ nome: item.nome, tamanho: "G", preco: item.grande, type }));
+    buttons[0].addEventListener("click", () => {
+      addItem({
+        nome: item.nome,
+        tamanho: "P",
+        preco: item.pequena,
+        type
+      });
+    });
+
+    buttons[1].addEventListener("click", () => {
+      addItem({
+        nome: item.nome,
+        tamanho: "G",
+        preco: item.grande,
+        type
+      });
+    });
 
     card.dataset.nome = item.nome;
     container.appendChild(node);
@@ -93,6 +127,7 @@ function renderSimpleCards(items, containerId, kind) {
   if (!container) return;
 
   container.innerHTML = "";
+
   items.forEach((item) => {
     const el = document.createElement("article");
     el.className = "drink-card";
@@ -102,9 +137,16 @@ function renderSimpleCards(items, containerId, kind) {
       <strong>${formatBRL.format(item.preco)}</strong>
       <button class="btn btn--primary" type="button">Adicionar</button>
     `;
+
     el.querySelector("button").addEventListener("click", () => {
-      addItem({ nome: item.nome, tamanho: "único", preco: item.preco, type: kind });
+      addItem({
+        nome: item.nome,
+        tamanho: "único",
+        preco: item.preco,
+        type: kind
+      });
     });
+
     container.appendChild(el);
   });
 }
@@ -122,32 +164,38 @@ function renderCart() {
   if (!list || !count || !total || !olives) return;
 
   state.olives = olives.checked;
-  count.textContent = `${state.items.reduce((sum, item) => sum + item.qtd, 0)} itens`;
+
+  const totalItens = state.items.reduce((sum, item) => sum + item.qtd, 0);
+  count.textContent = `${totalItens} ${totalItens === 1 ? "item" : "itens"}`;
   total.textContent = formatBRL.format(cartTotal());
 
   if (!state.items.length) {
     list.innerHTML = `<p class="empty">Seu pedido ainda está vazio.</p>`;
-    return;
+  } else {
+    list.innerHTML = "";
+
+    state.items.forEach((item, index) => {
+      const row = document.createElement("div");
+      row.className = "cart-item";
+      row.innerHTML = `
+        <div>
+          <strong>${item.qtd}x ${item.nome} ${item.tamanho !== "único" ? `(${item.tamanho})` : ""}</strong>
+          <p>${formatBRL.format(item.preco)} cada</p>
+        </div>
+        <button type="button" aria-label="Remover item">Remover</button>
+      `;
+
+      row.querySelector("button").addEventListener("click", () => removeItem(index));
+      list.appendChild(row);
+    });
   }
 
-  list.innerHTML = "";
-  state.items.forEach((item, index) => {
-    const row = document.createElement("div");
-    row.className = "cart-item";
-    row.innerHTML = `
-      <div>
-        <strong>${item.qtd}x ${item.nome} ${item.tamanho !== "único" ? `(${item.tamanho})` : ""}</strong>
-        <p>${formatBRL.format(item.preco)} cada</p>
-      </div>
-      <button type="button" aria-label="Remover item">Remover</button>
-    `;
-    row.querySelector("button").addEventListener("click", () => removeItem(index));
-    list.appendChild(row);
-  });
+  flashCartPanel();
 }
 
 function buildOrderMessage() {
   const lines = [];
+
   lines.push("Olá! Quero fazer meu pedido na Don Gennaro.");
   lines.push("");
   lines.push("Pedido:");
@@ -157,7 +205,10 @@ function buildOrderMessage() {
     lines.push(`- ${item.qtd}x ${item.nome} ${item.tamanho !== "único" ? `(${item.tamanho})` : ""}${extra}`);
   });
 
-  if (state.olives) lines.push("- Quero azeitonas");
+  if (state.olives) {
+    lines.push("- Quero azeitonas");
+  }
+
   if (state.obs.trim()) {
     lines.push("");
     lines.push(`Observações: ${state.obs.trim()}`);
@@ -183,25 +234,34 @@ function confirmOrder() {
 
 function clearCart() {
   state.items = [];
+  state.olives = false;
+  state.obs = "";
+
   const olives = document.getElementById("want-olives");
   const obs = document.getElementById("obs");
+
   if (olives) olives.checked = false;
   if (obs) obs.value = "";
+
   renderCart();
 }
 
 async function loadMenu() {
   try {
     const res = await fetch("../data/cardapio.json");
-    if (!res.ok) throw new Error("Falha ao carregar cardápio.");
+    if (!res.ok) {
+      throw new Error("Falha ao carregar cardápio.");
+    }
+
     const data = await res.json();
 
     renderPizzaCards(data.categorias.salgadas, "lista-salgadas", "salgada");
     renderPizzaCards(data.categorias.doces, "lista-doces", "doce");
-    renderSimpleCards(menu.bordas, "bordas", "borda");
+    renderSimpleCards(menu.bordas, "lista-bebidas", "borda");
     renderSimpleCards(menu.bebidas, "lista-bebidas", "bebida");
   } catch (e) {
     const target = document.getElementById("conteudo");
+
     if (target) {
       target.insertAdjacentHTML(
         "afterbegin",
@@ -214,6 +274,7 @@ async function loadMenu() {
 document.addEventListener("click", (event) => {
   const clear = event.target.closest("#btn-clear");
   const send = event.target.closest("#btn-whatsapp");
+
   if (clear) clearCart();
   if (send) confirmOrder();
 });
@@ -222,6 +283,7 @@ document.addEventListener("input", (event) => {
   if (event.target.id === "obs") {
     state.obs = event.target.value;
   }
+
   if (event.target.id === "want-olives") {
     state.olives = event.target.checked;
   }

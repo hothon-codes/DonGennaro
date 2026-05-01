@@ -84,6 +84,25 @@ textarea {
     url("../assets/img/pizza-fundo-logo.PNG") center/cover no-repeat;
   overflow: hidden;
 }
+.hero {
+  min-height: 100svh;
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.18), rgba(17, 16, 16, 0.9)),
+    url("../assets/img/pizza-fundo-logo.PNG") center/cover no-repeat;
+}
+
+
+.hero__content {
+  padding: 48px 0 36px;
+}
+
+.brand__logo {
+  width: min(140px, 38vw);
+}
+
+.hero h1 {
+  font-size: clamp(2rem, 10vw, 5rem);
+}
 
 .hero__overlay {
   position: absolute;
@@ -96,6 +115,46 @@ textarea {
   z-index: 1;
   padding: 72px 0 56px;
   text-align: left;
+}
+.hero-card,
+.promo-card,
+.order-panel {
+  overflow: hidden;
+}
+
+.promo-card img,
+.hero-card img,
+.order-panel img {
+  width: 100%;
+  max-width: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.promo-card img {
+  aspect-ratio: 4 / 5;
+  max-height: 560px;
+}
+
+.hero-card img {
+  aspect-ratio: 1 / 1;
+  max-height: 420px;
+}
+
+.order-panel__top {
+  aspect-ratio: 4 / 5;
+  max-height: 460px;
+  overflow: hidden;
+}
+
+section {
+  scroll-margin-top: 96px;
+}
+
+.order-panel__top img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .brand {
@@ -194,6 +253,9 @@ textarea {
   font-size: 0.92rem;
 }
 
+section {
+  scroll-margin-top: 96px;
+}
 .menu-fixo {
   position: sticky;
   top: 0;
@@ -427,6 +489,15 @@ textarea {
   padding: 18px;
 }
 
+.cart-panel {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cart-panel--flash {
+  transform: scale(1.01);
+  box-shadow: 0 0 0 2px rgba(214, 31, 31, 0.35), var(--shadow);
+}
+
 .cart-panel__header {
   display: flex;
   justify-content: space-between;
@@ -595,4 +666,24 @@ textarea {
   .hero-card--compact {
     grid-template-columns: 0.9fr 1.1fr;
   }
+}
+
+.promo-card img {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+}
+
+@media (min-width: 768px) {
+  .promo-card img {
+    height: 420px;
+  }
+}
+.cart-panel {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cart-panel.cart-panel--flash {
+  transform: scale(1.01);
+  box-shadow: 0 0 0 2px rgba(214, 31, 31, 0.35), var(--shadow);
 }
