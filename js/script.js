@@ -33,11 +33,10 @@ function whatsappLink(message) {
 
 function updateWhatsAppLinks() {
   const message = "Olá! Vim pelo cardápio digital da Don Gennaro e gostaria de fazer um pedido.";
+
   ["whatsapp-hero", "whatsapp-float"].forEach((id) => {
     const el = document.getElementById(id);
-    if (el) {
-      el.href = whatsappLink(message);
-    }
+    if (el) el.href = whatsappLink(message);
   });
 }
 
@@ -76,7 +75,7 @@ function removeItem(index) {
   renderCart();
 }
 
-function renderPizzaCards(items, containerId, type) {
+function renderPizzaCards(items, containerId, tipo) {
   const container = document.getElementById(containerId);
   const template = document.getElementById("pizza-template");
 
@@ -104,7 +103,7 @@ function renderPizzaCards(items, containerId, type) {
         nome: item.nome,
         tamanho: "P",
         preco: item.pequena,
-        type
+        tipo
       });
     });
 
@@ -113,7 +112,7 @@ function renderPizzaCards(items, containerId, type) {
         nome: item.nome,
         tamanho: "G",
         preco: item.grande,
-        type
+        tipo
       });
     });
 
@@ -122,18 +121,20 @@ function renderPizzaCards(items, containerId, type) {
   });
 }
 
-function renderSimpleCards(items, containerId, kind) {
+function renderSimpleCards(items, containerId, tipo, append = false) {
   const container = document.getElementById(containerId);
   if (!container) return;
 
-  container.innerHTML = "";
+  if (!append) {
+    container.innerHTML = "";
+  }
 
   items.forEach((item) => {
     const el = document.createElement("article");
     el.className = "drink-card";
     el.innerHTML = `
       <h3>${item.nome}</h3>
-      <p>${kind === "bebida" ? "Adicione ao pedido com um toque." : "Borda disponível para sua pizza."}</p>
+      <p>${tipo === "bebida" ? "Adicione ao pedido com um toque." : "Borda disponível para sua pizza."}</p>
       <strong>${formatBRL.format(item.preco)}</strong>
       <button class="btn btn--primary" type="button">Adicionar</button>
     `;
@@ -143,7 +144,7 @@ function renderSimpleCards(items, containerId, kind) {
         nome: item.nome,
         tamanho: "único",
         preco: item.preco,
-        type: kind
+        tipo
       });
     });
 
@@ -194,15 +195,16 @@ function renderCart() {
 }
 
 function buildOrderMessage() {
-  const lines = [];
-
-  lines.push("Olá! Quero fazer meu pedido na Don Gennaro.");
-  lines.push("");
-  lines.push("Pedido:");
+  const lines = [
+    "Olá! Quero fazer meu pedido na Don Gennaro.",
+    "",
+    "Pedido:"
+  ];
 
   state.items.forEach((item) => {
     const extra = item.extra ? ` - ${item.extra}` : "";
-    lines.push(`- ${item.qtd}x ${item.nome} ${item.tamanho !== "único" ? `(${item.tamanho})` : ""}${extra}`);
+    const tamanho = item.tamanho !== "único" ? `(${item.tamanho})` : "";
+    lines.push(`- ${item.qtd}x ${item.nome} ${tamanho}${extra}`.trim());
   });
 
   if (state.olives) {
@@ -249,8 +251,9 @@ function clearCart() {
 async function loadMenu() {
   try {
     const res = await fetch("../data/cardapio.json");
+
     if (!res.ok) {
-      throw new Error("Falha ao carregar cardápio.");
+      throw new Error("Falha ao carregar o cardápio.");
     }
 
     const data = await res.json();
@@ -258,8 +261,8 @@ async function loadMenu() {
     renderPizzaCards(data.categorias.salgadas, "lista-salgadas", "salgada");
     renderPizzaCards(data.categorias.doces, "lista-doces", "doce");
     renderSimpleCards(menu.bordas, "lista-bebidas", "borda");
-    renderSimpleCards(menu.bebidas, "lista-bebidas", "bebida");
-  } catch (e) {
+    renderSimpleCards(menu.bebidas, "lista-bebidas", "bebida", true);
+  } catch (error) {
     const target = document.getElementById("conteudo");
 
     if (target) {

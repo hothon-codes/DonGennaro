@@ -77,31 +77,13 @@ textarea {
 .hero {
   position: relative;
   min-height: 100vh;
+  min-height: 100svh;
   display: grid;
   align-items: center;
   background:
     linear-gradient(180deg, rgba(0, 0, 0, 0.18), rgba(17, 16, 16, 0.9)),
     url("../assets/img/pizza-fundo-logo.PNG") center/cover no-repeat;
   overflow: hidden;
-}
-.hero {
-  min-height: 100svh;
-  background:
-    linear-gradient(180deg, rgba(0, 0, 0, 0.18), rgba(17, 16, 16, 0.9)),
-    url("../assets/img/pizza-fundo-logo.PNG") center/cover no-repeat;
-}
-
-
-.hero__content {
-  padding: 48px 0 36px;
-}
-
-.brand__logo {
-  width: min(140px, 38vw);
-}
-
-.hero h1 {
-  font-size: clamp(2rem, 10vw, 5rem);
 }
 
 .hero__overlay {
@@ -116,46 +98,6 @@ textarea {
   padding: 72px 0 56px;
   text-align: left;
 }
-.hero-card,
-.promo-card,
-.order-panel {
-  overflow: hidden;
-}
-
-.promo-card img,
-.hero-card img,
-.order-panel img {
-  width: 100%;
-  max-width: 100%;
-  display: block;
-  object-fit: cover;
-}
-
-.promo-card img {
-  aspect-ratio: 4 / 5;
-  max-height: 560px;
-}
-
-.hero-card img {
-  aspect-ratio: 1 / 1;
-  max-height: 420px;
-}
-
-.order-panel__top {
-  aspect-ratio: 4 / 5;
-  max-height: 460px;
-  overflow: hidden;
-}
-
-section {
-  scroll-margin-top: 96px;
-}
-
-.order-panel__top img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
 
 .brand {
   width: fit-content;
@@ -167,6 +109,13 @@ section {
   height: auto;
   border-radius: 50%;
   box-shadow: var(--shadow);
+}
+
+.hero h1 {
+  font-size: clamp(2.6rem, 8vw, 5rem);
+  line-height: 0.95;
+  margin-bottom: 16px;
+  max-width: 9ch;
 }
 
 .hero__eyebrow {
@@ -181,13 +130,6 @@ section {
   color: #f4d98b;
   font-size: 0.88rem;
   margin-bottom: 16px;
-}
-
-.hero h1 {
-  font-size: clamp(2.6rem, 8vw, 5rem);
-  line-height: 0.95;
-  margin-bottom: 16px;
-  max-width: 9ch;
 }
 
 .hero__text {
@@ -256,10 +198,12 @@ section {
 section {
   scroll-margin-top: 96px;
 }
+
 .menu-fixo {
   position: sticky;
   top: 0;
   z-index: 30;
+  -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
   background: rgba(15, 14, 14, 0.88);
   border-top: 1px solid var(--border);
@@ -272,6 +216,7 @@ section {
   overflow-x: auto;
   padding: 14px 0;
   scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 .menu-fixo__inner::-webkit-scrollbar {
@@ -311,19 +256,23 @@ section {
   color: var(--muted);
 }
 
-.promo-card {
-  border-radius: var(--radius-xl);
+.promo-card,
+.hero-card,
+.order-panel {
   overflow: hidden;
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow);
 }
 
-.promo-card img,
-.hero-card img,
-.order-panel img {
+.promo-card {
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  background: var(--surface);
+}
+
+.promo-card img {
   width: 100%;
   height: auto;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .hero-card {
@@ -332,9 +281,17 @@ section {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-xl);
-  overflow: hidden;
   box-shadow: var(--shadow);
   margin-bottom: 18px;
+}
+
+.hero-card img {
+  width: 100%;
+  max-width: 100%;
+  display: block;
+  aspect-ratio: 1 / 1;
+  max-height: 420px;
+  object-fit: cover;
 }
 
 .hero-card__content {
@@ -360,7 +317,7 @@ section {
 }
 
 .pizza-card {
-  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow);
@@ -468,6 +425,7 @@ section {
 
 .order-panel__top {
   aspect-ratio: 4 / 3;
+  max-height: 460px;
   overflow: hidden;
 }
 
@@ -487,9 +445,6 @@ section {
 
 .cart-panel {
   padding: 18px;
-}
-
-.cart-panel {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -521,6 +476,7 @@ section {
   align-items: center;
   gap: 10px;
   cursor: pointer;
+  -webkit-user-select: none;
   user-select: none;
 }
 
@@ -533,7 +489,7 @@ section {
   display: grid;
   gap: 10px;
   padding: 14px;
-  background: rgba(255,255,255,0.03);
+  background: rgba(255, 255, 255, 0.03);
   border: 1px dashed var(--border);
   border-radius: var(--radius-lg);
   min-height: 120px;
@@ -545,7 +501,7 @@ section {
   grid-template-columns: 1fr auto;
   gap: 10px;
   padding: 12px;
-  background: rgba(255,255,255,0.04);
+  background: rgba(255, 255, 255, 0.04);
   border-radius: 14px;
 }
 
@@ -649,6 +605,12 @@ section {
   }
 }
 
+@media (min-width: 768px) {
+  .promo-card img {
+    max-height: 720px;
+  }
+}
+
 @media (min-width: 1024px) {
   .grid {
     grid-template-columns: repeat(3, 1fr);
@@ -666,24 +628,4 @@ section {
   .hero-card--compact {
     grid-template-columns: 0.9fr 1.1fr;
   }
-}
-
-.promo-card img {
-  width: 100%;
-  height: 320px;
-  object-fit: cover;
-}
-
-@media (min-width: 768px) {
-  .promo-card img {
-    height: 420px;
-  }
-}
-.cart-panel {
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.cart-panel.cart-panel--flash {
-  transform: scale(1.01);
-  box-shadow: 0 0 0 2px rgba(214, 31, 31, 0.35), var(--shadow);
 }
