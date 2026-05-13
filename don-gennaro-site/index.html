@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="color-scheme" content="light" />
-  <meta name="color-scheme" content="light" />
   <meta
     name="description"
     content="Cardápio digital da Don Gennaro. Veja sabores, preços e monte seu pedido pelo WhatsApp."
@@ -155,7 +154,12 @@
           <p>Adicione borda recheada ao pedido sem complicar o fluxo do cliente.</p>
         </div>
 
-        <div class="border-grid">
+        <!--
+          BORDAS RECHEADAS
+          Edite esta seção manualmente quando precisar alterar sabores ou preços.
+          Se no futuro quiser puxar isso pelo JavaScript, dá para transformar em lista dinâmica.
+        -->
+        <div class="border-grid" id="lista-bordas">
           <article class="mini-card">
             <h3>Cheddar</h3>
             <p>Opção cremosa e marcante.</p>
@@ -187,7 +191,7 @@
       <div class="container">
         <div class="section-head">
           <h2>Bebidas</h2>
-          <p>Algumas opções já preparadas para integrar o carrinho ao pedido.</p>
+          <p>Esta seção será atualizada assim que a pizzaria confirmar as bebidas disponíveis.</p>
         </div>
 
         <div class="hero-card hero-card--right hero-card--compact">
@@ -200,12 +204,24 @@
             decoding="async"
           />
           <div class="hero-card__content">
-            <h3>Entrega de bebidas</h3>
-            <p>Inclua refrigerantes e sucos de 1 litro no mesmo pedido.</p>
+            <h3>Bebidas em atualização</h3>
+            <p>Assim que a pizzaria confirmar os sabores e tamanhos disponíveis, esta área será atualizada.</p>
           </div>
         </div>
 
-        <div class="drink-grid" id="lista-bebidas"></div>
+        <!--
+          BEBIDAS
+          Quando você souber as bebidas, pode:
+          1) deixar o JavaScript preencher automaticamente em #lista-bebidas; ou
+          2) trocar esta mensagem por cards fixos no HTML.
+        -->
+        <div class="drink-grid" id="lista-bebidas">
+          <article class="drink-card">
+            <h3>Em breve</h3>
+            <p>Estamos confirmando as bebidas disponíveis para incluir no cardápio.</p>
+            <strong>Aguardando atualização</strong>
+          </article>
+        </div>
       </div>
     </section>
 

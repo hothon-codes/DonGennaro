@@ -36,7 +36,9 @@ function updateWhatsAppLinks() {
 
   ["whatsapp-hero", "whatsapp-float"].forEach((id) => {
     const el = document.getElementById(id);
-    if (el) el.href = whatsappLink(message);
+    if (el) {
+      el.href = whatsappLink(message);
+    }
   });
 }
 
@@ -121,34 +123,46 @@ function renderPizzaCards(items, containerId, tipo) {
   });
 }
 
-function renderSimpleCards(items, containerId, tipo, append = false) {
+function createSimpleCard(item, tipo) {
+  const el = document.createElement("article");
+  const title = document.createElement("h3");
+  const desc = document.createElement("p");
+  const price = document.createElement("strong");
+  const button = document.createElement("button");
+
+  el.className = tipo === "borda" ? "mini-card" : "drink-card";
+
+  title.textContent = item.nome;
+  desc.textContent =
+    tipo === "bebida"
+      ? "Adicione ao pedido com um toque."
+      : "Borda disponível para sua pizza.";
+  price.textContent = formatBRL.format(item.preco);
+
+  button.className = "btn btn--primary";
+  button.type = "button";
+  button.textContent = "Adicionar";
+
+  button.addEventListener("click", () => {
+    addItem({
+      nome: item.nome,
+      tamanho: "único",
+      preco: item.preco,
+      tipo
+    });
+  });
+
+  el.append(title, desc, price, button);
+  return el;
+}
+
+function renderSimpleCards(items, containerId, tipo) {
   const container = document.getElementById(containerId);
   if (!container) return;
 
-  if (!append) {
-    container.innerHTML = "";
-  }
-
+  container.innerHTML = "";
   items.forEach((item) => {
-    const el = document.createElement("article");
-    el.className = "drink-card";
-    el.innerHTML = `
-      <h3>${item.nome}</h3>
-      <p>${tipo === "bebida" ? "Adicione ao pedido com um toque." : "Borda disponível para sua pizza."}</p>
-      <strong>${formatBRL.format(item.preco)}</strong>
-      <button class="btn btn--primary" type="button">Adicionar</button>
-    `;
-
-    el.querySelector("button").addEventListener("click", () => {
-      addItem({
-        nome: item.nome,
-        tamanho: "único",
-        preco: item.preco,
-        tipo
-      });
-    });
-
-    container.appendChild(el);
+    container.appendChild(createSimpleCard(item, tipo));
   });
 }
 
@@ -178,15 +192,22 @@ function renderCart() {
     state.items.forEach((item, index) => {
       const row = document.createElement("div");
       row.className = "cart-item";
-      row.innerHTML = `
-        <div>
-          <strong>${item.qtd}x ${item.nome} ${item.tamanho !== "único" ? `(${item.tamanho})` : ""}</strong>
-          <p>${formatBRL.format(item.preco)} cada</p>
-        </div>
-        <button type="button" aria-label="Remover item">Remover</button>
-      `;
 
-      row.querySelector("button").addEventListener("click", () => removeItem(index));
+      const info = document.createElement("div");
+      const title = document.createElement("strong");
+      const price = document.createElement("p");
+      const button = document.createElement("button");
+
+      title.textContent = `${item.qtd}x ${item.nome} ${item.tamanho !== "único" ? `(${item.tamanho})` : ""}`;
+      price.textContent = `${formatBRL.format(item.preco)} cada`;
+
+      button.type = "button";
+      button.setAttribute("aria-label", "Remover item");
+      button.textContent = "Remover";
+      button.addEventListener("click", () => removeItem(index));
+
+      info.append(title, price);
+      row.append(info, button);
       list.appendChild(row);
     });
   }
@@ -203,8 +224,8 @@ function buildOrderMessage() {
 
   state.items.forEach((item) => {
     const extra = item.extra ? ` - ${item.extra}` : "";
-    const tamanho = item.tamanho !== "único" ? `(${item.tamanho})` : "";
-    lines.push(`- ${item.qtd}x ${item.nome} ${tamanho}${extra}`.trim());
+    const tamanho = item.tamanho !== "único" ? ` (${item.tamanho})` : "";
+    lines.push(`- ${item.qtd}x ${item.nome}${tamanho}${extra}`);
   });
 
   if (state.olives) {
@@ -260,8 +281,8 @@ async function loadMenu() {
 
     renderPizzaCards(data.categorias.salgadas, "lista-salgadas", "salgada");
     renderPizzaCards(data.categorias.doces, "lista-doces", "doce");
-    renderSimpleCards(menu.bordas, "lista-bebidas", "borda");
-    renderSimpleCards(menu.bebidas, "lista-bebidas", "bebida", true);
+    renderSimpleCards(menu.bordas, "lista-bordas", "borda");
+    renderSimpleCards(menu.bebidas, "lista-bebidas", "bebida");
   } catch (error) {
     const target = document.getElementById("conteudo");
 
